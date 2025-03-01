@@ -62,7 +62,7 @@ neo4j
 networkx
 numpy
 openai
-opencv-python
+opencv-python==4.5.5.64
 opt_einsum
 optree
 packaging
