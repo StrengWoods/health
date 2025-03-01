@@ -26,7 +26,7 @@ logging.basicConfig(
 
 # 页面配置
 st.set_page_config(
-    page_title="健康先知 - 专业健康分析",
+    page_title="健康先知 - AI健康分析",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -377,8 +377,8 @@ def main_app():
 
         st.subheader("📸 医学影像上传")
         img_col1, img_col2 = st.columns(2)
-        face_img = img_col1.file_uploader("面部照片", type=["jpg", "png", "jpeg"])
-        tongue_img = img_col2.file_uploader("舌苔照片", type=["jpg", "png", "jpeg"])
+        face_img = img_col1.file_uploader("面部照片（保证面部正对屏幕、五官清晰、光线明亮、距离屏幕20cm左右）", type=["jpg", "png", "jpeg"])
+        tongue_img = img_col2.file_uploader("舌苔照片（保证正对舌面且画面完整）", type=["jpg", "png", "jpeg"])
 
         submitted = st.form_submit_button("🚀 开始全面分析")
 
@@ -420,7 +420,7 @@ def main_app():
             }
 
             # 修改后的API提示词
-            with st.spinner("🔍 正在分析基础数据..."):
+            with st.spinner("🔍 正在分析基础数据...（约1分钟）"):
                 chat_prompt = f"""作为资深全科医生，请按以下要求分析健康数据：
                 {analysis_data}
 
@@ -455,12 +455,12 @@ def main_app():
                 st.warning("部分评分解析失败，使用默认值")
                 final_scores = {key: final_scores.get(key, 5) for key in required_scores}
 
-            with st.spinner("🧠 进行深度推理分析..."):
+            with st.spinner("🧠 进行深度推理分析...（约2分钟）"):
                 reasoner_prompt = f"""基于以下分析结果：
                 {chat_response}
 
                 请完成：
-                1. 生成综合健康评分（0-100分制）
+                1. 生成综合健康评分（0-100分制）并简要概括健康状态、明确是否需要就医
                 2. 创建详细的分项健康评分表（症状、饮食、代谢、睡眠）
                 3. 预测或判断可能的症状
                 4. 给出分步骤的专业建议
