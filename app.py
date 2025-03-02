@@ -354,7 +354,7 @@ class MedicalAnalyzer:
 def main_app():
     client = get_deepseek_client()
     analyzer = MedicalAnalyzer()
-    st.title("🏥 健康先知智能分析系统demo")
+    st.title("🏥 健康先知智能分析系统demo——by 吴思骏")
     st.markdown("---")
 
     with st.form("health_form"):
